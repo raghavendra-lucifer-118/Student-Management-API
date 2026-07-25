@@ -1,0 +1,11 @@
+[project]
+name = "students-course-api"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "fastapi[standard]>=0.140.0",
+    "psycopg2>=2.9.12",
+    "sqlalchemy>=2.0.51",
+]
