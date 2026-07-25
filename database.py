@@ -12,13 +12,13 @@ class Student_table(Base):
     __tablename__ = "students"
     std_id = Column(Integer , primary_key=True)
     std_name = Column(String)
-    course_id = Column(Integer , ForeignKey("courses.id"))
+    course_id = Column(Integer , ForeignKey("courses.course_id"))
     courses = relationship("Courses_table")
     
     
 class Courses_table(Base):
     __tablename__ = "courses"
-    id = Column(Integer ,primary_key=True)    
+    course_id = Column(Integer ,primary_key=True)    
     course_name = Column(String)
     
     

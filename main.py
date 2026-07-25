@@ -1,7 +1,8 @@
 from fastapi import FastAPI , Depends
 from models import Student_model
-from database import db_session , Student_table 
+from database import db_session , Student_table  , Courses_table
 from sqlalchemy.orm import  Session
+from sqlalchemy import select
 
 
 app = FastAPI()
@@ -25,6 +26,16 @@ def get_students(db : Session = Depends(get_db)):
 def get_student(req_id:int , db : Session = Depends(get_db)):
     student = db.query(Student_table).filter(Student_table.std_id == req_id).first()
     return student
+
+@app.get("/students/{req_id}/course")
+def get_student(req_id:int , db : Session = Depends(get_db)):
+    stmt = (
+        select(Student_table.std_name, Courses_table.course_name)
+        .join(Courses_table, Student_table.course_id == Courses_table.course_id)
+    )
+    results = db.execute(stmt).all()
+    response = [{"student": name, "course": course} for name, course in results]
+    return response
 
 @app.post("/student")
 def add_student(std : Student_model , db : Session = Depends(get_db)):
