@@ -1,5 +1,5 @@
 from fastapi import FastAPI , Depends
-from models import Student_model
+from schemas.models import Student_model
 from database import db_session , Student_table  , Courses_table
 from sqlalchemy.orm import  Session
 from sqlalchemy import select
